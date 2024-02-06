@@ -1,16 +1,17 @@
 package it.epicode.ordiniTavoli.bean;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ServizioOrdine {
 
-    @Value("${ordineTavoli.coperto_ristorante}")
-    private double coperto;
+    private double coperto = 1.50;
 
     public String stampaOrdine(Ordine ordine) {
-        System.out.println("\nORDINE STAMPATO:");
+        System.out.println("\nL'ORDINE STAMPATO E': " + StatoOrdini.IN_CORSO);
 
         for (ItemOrdine item : ordine.getItems()) {
             System.out.println(item.getQuantità() + "x " + item.getMenuItem().getNome() + " - $" + item.getTotale() + "\n");

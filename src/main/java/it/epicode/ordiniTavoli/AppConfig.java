@@ -96,8 +96,7 @@ public class AppConfig {
         ordine.addItem(margheritaSalame(),1);
         ordine.addItem(salame(),3);
         ordine.addItem(pomodoro(),2);
-        ordine.addItem(prosciutto(),1);
+        ordine.addItem(prosciutto(),3);
         return ordine;
     }
-
 }

@@ -18,4 +18,5 @@ public class ItemOrdine {
     public double getTotale() {
         return menuItem.getPrezzo() * quantità;
     }
+
 }
