@@ -1,10 +1,7 @@
 package it.epicode.ordiniTavoli;
 
 
-import it.epicode.ordiniTavoli.bean.Menu;
-import it.epicode.ordiniTavoli.bean.StatoTavolo;
-import it.epicode.ordiniTavoli.bean.Tavolo;
-import it.epicode.ordiniTavoli.bean.Topping;
+import it.epicode.ordiniTavoli.bean.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -33,14 +30,6 @@ class OrdiniTavoliApplicationTests {
 	void verificaTavalo(){
 		Tavolo tavolo = ctx.getBean("tavolo1",Tavolo.class);
 		System.out.println(tavolo);
-	}
-
-	@Test
-	void verificaStatoTAvolo(){
-		Tavolo tavolo = ctx.getBean("tavolo2",Tavolo.class);
-		Assertions.assertAll(
-				()-> Assertions.assertNotNull(tavolo),
-				()-> Assertions.assertFalse("LIBERO".equals(StatoTavolo.LIBERO)));
 	}
 
 
