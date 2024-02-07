@@ -1,21 +1,44 @@
 package it.epicode.ordiniTavoli.bean;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Ordine {
-    private StatoOrdini stato;
-    private List<ItemOrdine> items = new ArrayList<>();
+    private static int contatore=1;
+    private int numeroOrdine;
+    private int numeroCoperti;
+    private StatoOrdini orderState;
+    private LocalTime oraOrdine;
 
-    public void addItem(Item menuItem, int quantità) {
-        items.add(new ItemOrdine(menuItem, quantità));
+    private Tavolo table;
+    private List<Pizza> pizze;
+    private List<Drink> drinks;
+
+    public Ordine(Tavolo table, int numeroCoperti) throws Exception{
+        if(numeroCoperti<=table.getNumeroMaxCoperti())
+            this.numeroCoperti=numeroCoperti;
+        else
+            throw new Exception("Numero max coperti del tavolo superato");
+
+        if(table.getStatoTavolo().equals(StatoTavolo.LIBERO))
+            this.table=table;
+        else
+            throw new Exception("Tavolo occupato");
+
+        numeroOrdine = contatore++;
+        orderState = StatoOrdini.IN_CORSO;
+        oraOrdine = LocalTime.now();
+
+        pizze = new ArrayList<>();
+        drinks = new ArrayList<>();
     }
-    public void setStato(StatoOrdini stato) {
-        this.stato = stato;
-    }
 
+    public double totaleOrdine(){
+        double totale = table.getCostoCoperto()*numeroCoperti;
 
-    public List<ItemOrdine> getItems() {
-        return items;
+        totale = totale + pizze.stream().mapToDouble(pizza->pizza.getPrezzo()).sum() +
+                drinks.stream().mapToDouble(drink-> drink.getPrezzo()).sum();
+        return totale;
     }
 }

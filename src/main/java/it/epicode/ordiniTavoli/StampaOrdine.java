@@ -3,7 +3,6 @@ package it.epicode.ordiniTavoli;
 
 import it.epicode.ordiniTavoli.bean.Menu;
 import it.epicode.ordiniTavoli.bean.Ordine;
-import it.epicode.ordiniTavoli.bean.ServizioOrdine;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;

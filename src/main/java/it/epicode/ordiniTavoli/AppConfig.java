@@ -1,13 +1,16 @@
 package it.epicode.ordiniTavoli;
 
 import it.epicode.ordiniTavoli.bean.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 
 import java.util.List;
 
 @Configuration
+@PropertySource("application.properties")
 public class AppConfig {
     @Bean("water")
     public Drink water(){
@@ -77,6 +80,7 @@ public class AppConfig {
         margheritaSalame.setNome("Pizza Margherita con salame");
         margheritaSalame.setCalorie(margheritaSalame.getCalorie()+ salame().getCalorie());
         margheritaSalame.setPrezzo(margheritaSalame.getPrezzo()+ salame().getPrezzo());
+        //margheritaSalame.getToppings().add(salame());
         List<Topping> toppings = List.of(mozzarella(), pomodoro(), salame());
         margheritaSalame.setToppings(toppings);
         return margheritaSalame;
@@ -89,14 +93,24 @@ public class AppConfig {
         menu.setPizze(List.of(margherita(), margheritaSalame()));
         return menu;
     }
-    @Bean("ordine")
-    public Ordine ordine(){
-        Ordine ordine = new Ordine();
-        ordine.addItem(margherita(), 2);
-        ordine.addItem(margheritaSalame(),1);
-        ordine.addItem(salame(),3);
-        ordine.addItem(pomodoro(),2);
-        ordine.addItem(prosciutto(),3);
-        return ordine;
+
+    @Bean("tavolo1")
+    public Tavolo tavolo1(@Value("${tavolo1.coperto}") String coperto){
+        Tavolo tavolo = new Tavolo();
+        tavolo.setNumero(1);
+        tavolo.setStatoTavolo(StatoTavolo.LIBERO);
+        tavolo.setNumeroMaxCoperti(6);
+        tavolo.setCostoCoperto(Double.parseDouble(coperto));
+        return tavolo;
+    }
+
+    @Bean("tavolo2")
+    public Tavolo tavolo2(@Value("${tavolo2.coperto}") String coperto){
+        Tavolo tavolo = new Tavolo();
+        tavolo.setNumero(2);
+        tavolo.setStatoTavolo(StatoTavolo.LIBERO);
+        tavolo.setNumeroMaxCoperti(8);
+        tavolo.setCostoCoperto(Double.parseDouble(coperto));
+        return tavolo;
     }
 }
