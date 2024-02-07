@@ -12,7 +12,7 @@ public class Menu {
     private List<Drink> drinks;
     private List<Topping> toppings;
     private List<Pizza> pizze;
-    private Logger logger = LoggerFactory.getLogger("w5d2p");
+    private Logger logger = LoggerFactory.getLogger("ordineTavoli");
 
     public void stampaMenu(){
         logger.info("PIZZE");

@@ -1,9 +1,12 @@
 package it.epicode.ordiniTavoli.bean;
 
+import lombok.Data;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class Ordine {
     private static int contatore=1;
     private int numeroOrdine;
