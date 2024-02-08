@@ -1,17 +1,30 @@
 package it.epicode.ordiniTavoli.bean;
 
+import jakarta.persistence.*;
 import lombok.Data;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.slf4j.Logger;
 
 @Data
+@Entity
 public class Menu {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @OneToMany(mappedBy = "menu")
     private List<Drink> drinks;
+
+    @OneToMany(mappedBy = "menu")
     private List<Topping> toppings;
+
+    @OneToMany(mappedBy = "menu")
     private List<Pizza> pizze;
+
+    @Transient
     private Logger logger = LoggerFactory.getLogger("ordineTavoli");
 
     public void stampaMenu(){
